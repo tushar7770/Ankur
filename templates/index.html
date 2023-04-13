@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet" />
+    <title>Team Ankur</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <!-- <script src="{{ url_for('static', filename='js/stars.js') }}"></script> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+    <div class="navbarr">
+        <nav class="navbar navbar-expand">
+            <a class="navbar-brand" href="/">Ankur</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/vision">About us <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+
+            </div>
+        </nav>
+    </div>
+
+    <div class="gauge_container">
+        <div>
+            <h2>Current Sensor Readings</h2>
+        </div>
+        <div class="meter">
+            <div id="g1"></div>
+            <div id="g2"></div>
+            <div id="g3"></div>
+
+            <script src="../static/raphael-2.1.4.min.js"></script>
+            <script src="../static/justgage.js"></script>
+            <script>
+                var tds = "{{curr[0]}}";
+                var temp = "{{curr[1]}}";
+                var ph = "{{curr[2]}}";
+
+                document.addEventListener("DOMContentLoaded", function (event) {
+                    g1 = new JustGage({
+                        id: "g1",
+                        value: tds,
+                        valueFontColor: '#010203',
+                        valueFontFamily: "Georgia",
+                        decimals: 3,
+                        min: 0,
+                        max: 1000,
+                        title: "TDS",
+                        titleFontColor: '#010203',
+                        titlePosY: 50,
+                        label: "ppm",
+                        levelColors: ['#00ABFF'],
+                        labelFontColor: "#010203",
+                        labelMinFontSize: 12,
+                        gaugeWidthScale: 0.3,
+                        pointer: true,
+                        pointerOptions: {
+                            toplength: 5,
+                            bottomlength: 15,
+                            bottomwidth: 2,
+                            color: '#010203',
+                            stroke: '#010203',
+                            stroke_width: 3,
+                            stroke_linecap: 'round'
+                        },
+                        gaugeColor: "#C5C6D0"
+                        // donut: true
+
+
+                        // customSectors: {
+                        //     ranges: [
+                        //         { color: "#00FF00", lo: 0, hi: 300 },
+                        //         { color: "#FFFF00", lo: 301, hi: 600 },
+                        //         { color: "#FFA500", lo: 601, hi: 900 },
+                        //         { color: "#FF0000", lo: 901, hi: 1000 }
+                        //     ]
+                        // },
+                        // counter: true
+
+                    });
+                    g2 = new JustGage({
+                        id: "g2",
+                        value: temp,
+                        valueFontColor: '#010203',
+                        valueFontFamily: "Georgia",
+                        decimals: 2,
+                        min: 0,
+                        max: 100,
+                        title: "Temperature",
+                        titleFontColor: '#010203',
+                        label: "Celcius",
+                        levelColors: ['#00ABFF'],
+                        labelFontColor: '#010203',
+                        labelMinFontSize: 12,
+                        gaugeWidthScale: 0.3,
+                        pointer: true,
+                        pointerOptions: {
+                            toplength: 5,
+                            bottomlength: 15,
+                            bottomwidth: 2,
+                            color: '#010203',
+                            stroke: '#010203',
+                            stroke_width: 3,
+                            stroke_linecap: 'round'
+                        },
+                        gaugeColor: "#C5C6D0"
+
+                        // customSectors: {
+                        //     ranges: [
+                        //         { color: "#0077be", lo: 0, hi: 20 },
+                        //         { color: "#f9d71c", lo: 21, hi: 50 },
+                        //         { color: "#ff0000", lo: 51, hi: 100 },
+                        //     ]
+                        // },
+                        // counter: true
+                    });
+                    g3 = new JustGage({
+                        id: "g3",
+                        value: ph,
+                        valueFontColor: '#010203',
+                        valueFontFamily: "Georgia",
+                        decimals: 2,
+                        min: 0,
+                        max: 14,
+                        title: "PH",
+                        titleFontColor: '#010203',
+                        label: "-Log[H+]",
+                        levelColors: ['#00ABFF'],
+                        labelFontColor: '#010203',
+                        labelMinFontSize: 12,
+                        gaugeWidthScale: 0.3,
+                        pointer: true,
+                        pointerOptions: {
+                            toplength: 5,
+                            bottomlength: 15,
+                            bottomwidth: 2,
+                            color: '#010203',
+                            stroke: '#010203',
+                            stroke_width: 3,
+                            stroke_linecap: 'round'
+                        },
+                        gaugeColor: "#C5C6D0"
+
+                        // customSectors: {
+                        //     ranges: [
+                        //         { color: "#ff0000", lo: 0, hi: 6.9 },
+                        //         { color: "#00FF00", lo: 7, hi: 8.49 },
+                        //         { color: "#800080", lo: 8.5, hi: 14 }
+                        //     ]
+                        // },
+                        // counter: true
+                    });
+                });
+            </script>
+        </div>
+
+    </div>
+    <!-- <div class="container my-3">
+        <h2>Add Sensor Data</h2>
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="tds_data" class="form-label">TDS</label>
+                <input type="number" step="0.001" class="form-control" name="tds_data" id="tds_data"
+                    aria-describedby="emailHelp">
+
+            </div>
+            <div class="mb-3">
+                <label for="temp_data" class="form-label">TEMPERATURE</label>
+                <input type="number" step="0.01" class="form-control" name="temp_data" id="temp_data">
+            </div>
+            <div class="mb-3">
+                <label for="ph_data" class="form-label">PH VALUE</label>
+                <input type="number" step="0.01" class="form-control" name="ph_data" id="ph_data">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <div class="container my-3">
+        <h2>Recorded Data</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">SNo</th>
+                    <th scope="col">TDS</th>
+                    <th scope="col">TEMP.</th>
+                    <th scope="col">PH</th>
+                    <th scope="col">TIME</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in stored_data %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{data.TDS}}</td>
+                    <td>{{data.TEMP}}</td>
+                    <td>{{data.PH_value}}</td>
+                    <td>{{data.date}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div> -->
+
+    <div class="container_graph">
+        <canvas id="tds_chart" width="400" height="300"></canvas>
+        <canvas id="temp_chart" width="400" height="300"></canvas>
+        <canvas id="ph_chart" width="400" height="300"></canvas>
+        <script>
+            var ctx1 = document.getElementById("tds_chart").getContext("2d");
+            var ctx2 = document.getElementById("temp_chart").getContext("2d");
+            var ctx3 = document.getElementById("ph_chart").getContext("2d");
+            var values_tds = [];
+            var values_temp = [];
+            var values_ph = [];
+            var l = []
+
+            "{% for data in stored_data %}"
+            values_tds.push("{{ data.TDS }}");
+            values_temp.push("{{ data.TEMP }}");
+            values_ph.push("{{ data.PH_value }}");
+            l.push("{{data.date}}");
+            "{% endfor %}"
+            var tds_chart = new Chart(ctx1, {
+                type: "line",
+                data: {
+                    labels: l,
+                    datasets: [
+                        {
+                            label: "TDS",
+                            data: values_tds,
+                            fill: false,
+                            borderColor: "#1DB954",
+                            lineTension: 0.2,
+
+                        }
+
+                    ],
+
+
+                },
+                options: {
+                    responsive: false,
+                    legend: {
+                        labels: {
+                            fontColor: "black",
+                            fontSize: 18
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: false,
+                            gridLines: {
+                                display: false
+                            }
+                        }], yAxes: [{
+                            gridLines: {
+                                display: false
+                            }, ticks: {
+                                fontColor: 'black'
+                            }
+
+                        }],
+                    }
+
+                }
+
+            });
+            var temp_chart = new Chart(ctx2, {
+                type: "line",
+                data: {
+                    labels: l,
+                    datasets: [
+                        {
+                            label: "TEMPERTURE",
+                            data: values_temp,
+                            fill: false,
+                            borderColor: "#1DB954",
+                            lineTension: 0.2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: false,
+                    legend: {
+                        labels: {
+                            fontColor: "black",
+                            fontSize: 18
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: false,
+                            gridLines: {
+                                display: false
+                            }
+                        }], yAxes: [{
+                            gridLines: {
+                                display: false
+                            }, ticks: {
+                                fontColor: 'black'
+                            }
+                        }],
+
+                    }
+                }
+
+            });
+            var ph_chart = new Chart(ctx3, {
+                type: "line",
+                data: {
+                    labels: l,
+                    datasets: [
+                        {
+                            label: "PH",
+                            data: values_ph,
+                            fill: false,
+                            borderColor: "#1DB954",
+                            lineTension: 0.2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: false,
+                    legend: {
+                        labels: {
+                            fontColor: "black",
+                            fontSize: 18
+                        }
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: false,
+                            gridLines: {
+                                display: false
+                            }
+                        }], yAxes: [{
+                            gridLines: {
+                                display: false
+                            }, ticks: {
+                                fontColor: 'black'
+                            }
+                        }],
+                    }
+
+                }
+
+            })
+        </script>
+    </div>
+
+    <section>
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+        <div class="wave wave4"></div>
+    </section>
+
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* background-color: #001141; */
+    /* background-color: white; */
+    background: #1F1C2C;
+    background: -webkit-linear-gradient(to right, #928DAB, #1F1C2C);
+    background: linear-gradient(to right, #928DAB, #1F1C2C);
+    /* Created with https://www.css-gradient.com */
+    /* Created with https://www.css-gradient.com */
+    /* background: #DEC7FC;
+    background: -webkit-linear-gradient(top left, #DEC7FC, #420D87);
+    background: -moz-linear-gradient(top left, #DEC7FC, #e5ddea);
+    background: linear-gradient(to bottom right, #DEC7FC, #420D87); */
+
+
+
+    color: white;
+    font-family: 'Roboto', 'Poppins', sans-serif;
+}
+
+.navbar {
+    background-color: black;
+    color: white;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: white;
+}
+
+
+
+.gauge_container h2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+    margin-top: 10px;
+}
+
+.meter {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.meter>div {
+    border: solid 3px black;
+    border-radius: 12px;
+    width: 300px;
+    height: 200px;
+    background-color: #A45EE9;
+
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    justify-content: top;
+    text-align: center;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.container_graph {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    margin-bottom: 20vh;
+}
+
+.container_graph>canvas {
+    border: solid 3px black;
+    border-radius: 8px;
+    width: 300px;
+    height: 200px;
+    background-color: #F8E472;
+
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    justify-content: top;
+    text-align: center;
+    position: relative;
+    margin-bottom: 15px;
+}
+
+section {
+    position: fixed;
+    width: 100%;
+    height: 13vh;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+
+    background: transparent;
+
+    overflow: hidden;
+}
+
+section .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url(w2.png);
+    background-size: 1000px 100px;
+}
+
+section .wave.wave1 {
+    animation: animate 30s linear infinite;
+    z-index: 1000;
+    opacity: 1;
+    animation-delay: 0s;
+    bottom: 0;
+
+}
+
+section .wave.wave2 {
+    animation: animate2 15s linear infinite;
+    z-index: 999;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+
+}
+
+section .wave.wave3 {
+    animation: animate3 30s linear infinite;
+    z-index: 998;
+    opacity: 0.2;
+    animation-delay: 2s;
+    bottom: 15px;
+
+}
+
+section .wave.wave4 {
+    animation: animate2 5s linear infinite;
+    z-index: 997;
+    opacity: 0.7;
+    animation-delay: -5s;
+    bottom: 10px;
+
+}
+
+@keyframes animate {
+    0% {
+        background-position-x: 0;
+    }
+
+    100% {
+        background-position-x: 1000px;
+    }
+}
+
+@keyframes animate2 {
+    0% {
+        background-position-x: 0;
+    }
+
+    100% {
+        background-position-x: -1000px;
+    }
+}

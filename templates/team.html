@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Team</title>
+
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        scroll-behavior: smooth;
+    }
+
+    .page {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        background-color: black;
+    }
+
+    .image-container {
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .image-container img {
+        height: 100%;
+        width: auto;
+        object-fit: cover;
+        background-color: transparent;
+    }
+
+    .description-container {
+        width: 50%;
+        height: 100%;
+        padding: 2em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        color: white;
+        position: relative;
+
+    }
+
+    .description-container h2 {
+        margin-bottom: 1em;
+    }
+
+    @media (max-width: 767px) {
+        .page {
+            height: auto;
+            flex-direction: column;
+            background-color: black;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100vh;
+
+        }
+
+        .image-container img {
+            height: 100%;
+
+            width: 100%;
+
+            object-fit: cover;
+
+        }
+
+        .description-container {
+            position: absolute;
+            width: 100%;
+            padding: 1em;
+            background-color: transparent;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-self: flex-end;
+        }
+    }
+</style>
+
+<body>
+
+    <div class="page" id="page1">
+        <div class="image-container">
+            <img src="{{url_for('static', filename='img/t2.png')}}" alt="error">
+        </div>
+        <div class="description-container">
+            <h2><strong>Tushar is Ankur.</strong></h2>
+
+            <p>Tushar panjeta, SDE , Ankur<br>
+                Everyone shares the vision and passion to build products that will change us and make people's lives
+                more "SMART".Working at Ankur is engaging, full of surprises, and I never stop learning.
+            </p>
+        </div>
+    </div>
+    <div class="page" id="page2">
+        <div class="image-container">
+            <img src="{{url_for('static', filename='img/y.png')}}" alt="error">
+        </div>
+        <div class="description-container">
+            <h2><strong>Yash is Ankur.</strong></h2>
+            <p>Yash Aggarwal, IOT Engineer , Ankur<br>
+                I am responsible for connecting and setting up all the sensor components with the ESP32 module. This
+                module is a powerful and versatile device that can communicate wirelessly with the internet. I ensure
+                the sensors work properly and the module accurately sends the collected data to the platform. what is
+                suitable role for this person
+            </p>
+        </div>
+    </div>
+    <div class="page" id="page3">
+        <div class="image-container">
+            <img src="{{url_for('static', filename='img/r.png')}}" alt="error">
+        </div>
+        <div class="description-container">
+            <h2><strong>Ravish is Ankur.</strong></h2>
+        </div>
+    </div>
+    <div class="page" id="page4">
+        <div class="image-container">
+            <img src="{{url_for('static', filename='img/s.png')}}" alt="error">
+        </div>
+        <div class="description-container">
+            <h2><strong>Sriram is Ankur.</strong></h2>
+
+            <p>Sriram Kanakam, Arduino Tester , Ankur<br>
+                My role involves the setup and testing of Arduino for pH and TDS (Total Dissolved Solids) parameters.
+                This includes verifying the accuracy of the results obtained from these sensors and also ensuring they
+                are tested for functionality. I am dedicated to ensuring that the Arduino setup and testing for pH and
+                TDS parameters are executed with precision and meticulous attention to detail. role name in one word
+            </p>
+        </div>
+    </div>
+    <div class="page" id="page5">
+        <div class="image-container">
+            <img src="{{url_for('static', filename='img/a.png')}}" alt="error">
+        </div>
+        <div class="description-container">
+            <h2><strong>Atharva is Ankur.</strong></h2>
+        </div>
+    </div>
+    <script>
+        const pages = document.querySelectorAll('.page');
+        let currentPage = 0;
+        let isScrolling = false;
+
+        function scrollToPage(index) {
+            isScrolling = true;
+            pages[index].scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                isScrolling = false;
+            }, 1000);
+        }
+
+        window.addEventListener('wheel', (event) => {
+            if (!isScrolling) {
+                if (event.deltaY < 0 && currentPage > 0) {
+                    currentPage--;
+                    scrollToPage(currentPage);
+                } else if (event.deltaY > 0 && currentPage < pages.length - 1) {
+                    currentPage++;
+                    scrollToPage(currentPage);
+                }
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>
