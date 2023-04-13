@@ -11,6 +11,9 @@ from email.mime.multipart import MIMEMultipart
 from email.message import EmailMessage
 from dotenv import load_dotenv
 import os
+import multiprocessing
+from app import app
+
 
 app = Flask(__name__)
 load_dotenv()
@@ -106,7 +109,7 @@ def receive_data():
                 message+=m
                 flag=True
             else:
-                m="\nNot safe for drinking💦💀"
+                m="\nNot safe for drinking"
                 message+=m
                 flag=True
         else:
@@ -115,7 +118,7 @@ def receive_data():
                 m="\nPossibiltty of bacterial growth, do not consume without boiling or other bacteria removal treatment"
                 message+=m
             else:
-                m="\nNot safe for drinking💦💀 as temp and tds parameters are not favourable"
+                m="\nNot safe for drinking as temp and tds parameters are not favourable"
                 message+=m
     if flag:    
         send_email(subject, message)
@@ -165,4 +168,46 @@ def me():
     return render_template("team.html")
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0',debug=True,port=8080)
+    # app.run(host='0.0.0.0',debug=True,port=8080)
+    workers = multiprocessing.cpu_count() * 2 + 1
+    bind = "0.0.0.0:8080"
+    worker_class = "gevent"
+    timeout = 120
+
+    print("Starting Gunicorn...")
+    print(f"Workers: {workers}")
+    print(f"Bind: {bind}")
+    print(f"Worker Class: {worker_class}")
+    print(f"Timeout: {timeout}")
+
+    # Start Gunicorn server
+    try:
+        from gunicorn import version_info as gunicorn_version_info
+        if gunicorn_version_info >= (20, 0):
+            # New API in Gunicorn 20+
+            from gunicorn.config import Config
+            config = Config()
+            config.set("workers", workers)
+            config.set("bind", bind)
+            config.set("worker_class", worker_class)
+            config.set("timeout", timeout)
+            from gunicorn.app.wsgiapp import WSGIApplication
+            WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]").run()
+        else:
+            # Old API in Gunicorn 19.x and lower
+            from gunicorn.app.base import Application
+            class FlaskApplication(Application):
+                def init(self, parser, opts, args):
+                    return {
+                        "bind": bind,
+                        "workers": workers,
+                        "worker_class": worker_class,
+                        "timeout": timeout,
+                    }
+
+                def load(self):
+                    return app
+
+            FlaskApplication().run()
+    except ImportError:
+        print("Gunicorn is not installed.")
