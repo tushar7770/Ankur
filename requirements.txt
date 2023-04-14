@@ -14,3 +14,4 @@ SQLAlchemy==1.4.0
 
 Werkzeug==2.2.3
 WTForms==3.0.1
+dotenv==1.0.0
