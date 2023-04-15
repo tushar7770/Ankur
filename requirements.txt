@@ -22,7 +22,7 @@ joblib==1.2.0
 
 
 
-python-dotenv==1.0.0
+python-dotenv==0.21.1
 
 
 
