@@ -67,8 +67,9 @@ def send_email(subject, message):
 
 @app.route('/data', methods=['POST'])
 def receive_data():
-     # Get data from request
-    data_str = request.form['sensor_data_avg']
+    # Get data from request
+    sensor_data = request.headers.get('Sensor-Data')
+    data_str = request.get_data(as_text=True)
     data = data_str.split(',')
 
     # Store data in the database
