@@ -25,7 +25,7 @@ joblib==1.2.0
 python-dotenv==0.21.1
 
 
-
+flask_cors==3.0.10
 SQLAlchemy==1.4.0
 stack-data==0.6.2
 
