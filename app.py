@@ -72,8 +72,9 @@ def receive_data():
     data = data_str.split(',')
 
     # Store data in the database
-    tds = float(data[1])
+    print(data)
     temp = float(data[0])
+    tds = float(data[1])
     ph = float(data[2])
     salinity= float(tds/0.55)
 
