@@ -12,9 +12,10 @@ from email.message import EmailMessage
 from dotenv import load_dotenv
 import os
 import multiprocessing
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 load_dotenv()
 
 
